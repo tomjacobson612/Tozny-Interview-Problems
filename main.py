@@ -6,19 +6,10 @@ with open("data.json", "r") as f:
 
 def price(x):
     """Returns price of an object in a list, if the object has a price. Otherwise, returns false."""
-    if not input_check(x, 'price'):
+    if 'price' not in x:
         return False
     else:
         return x['price']
-
-
-def input_check(x, string):
-    """Verifies whether an item in a list contains a string. Can be used to ensure a list contains a specific field."""
-
-    if string in x:
-        return True
-    else:
-        return False
 
 
 def parse_inventory(inventory):
@@ -28,9 +19,8 @@ def parse_inventory(inventory):
     my_dictionary = {}
 
     for x in inventory:
-        if not input_check(x, 'type'):
+        if 'type' not in x:
             continue
-
         elif x['type'] not in my_dictionary.keys():
             my_dictionary[x['type']] = [x]
         else:
@@ -62,15 +52,15 @@ def running_time(inventory, target=3600):
     over_target = []
     
     for x in inventory:
-        if not input_check(x, 'type'):
+        if 'type' not in x:
             continue
 
         if x['type'] == 'cd':
             total_run_time = 0
-            if not input_check(x, 'tracks'):
+            if 'tracks' not in x:
                 continue
             for i in x['tracks']:
-                if not input_check(i, 'seconds'):
+                if 'seconds' not in i:
                     continue
                 total_run_time += i['seconds']
             if total_run_time > target:
@@ -85,20 +75,20 @@ def cd_and_book(inventory):
     both = []
 
     for x in inventory:
-        if not input_check(x, 'type'):
+        if 'type' not in x:
             continue
         elif x['type'] == 'book':
-            if not input_check(x, 'author'):
+            if 'author' not in x:
                 continue
             else:
                 book_authors.append(x['author'])
 
     for x in inventory:
-        if not input_check(x, 'type'):
+        if 'type' not in x:
             continue
         if x['type'] == 'cd':
             for i in book_authors:
-                if not input_check(x, 'author'):
+                if 'author' not in x:
                     continue
                 if x['author'] == i:
                     both.append(x['author'])
@@ -136,32 +126,32 @@ def contains_year(inventory):
     contain_year = []
 
     for x in inventory:
-        if not input_check(x, 'type'):
+        if 'type' not in x:
             continue
         if x['type'] == 'book':
-            if not input_check(x, 'title'):
+            if 'title' not in x:
                 continue
             if string_contains_year(x['title']):
                 contain_year.append(x)
             else:
-                if not input_check(x, 'chapters'):
+                if 'chapters' not in x:
                     continue
                 if string_contains_year(x['chapters']):
                     contain_year.append(x)
 
         elif x['type'] == 'dvd':
-            if not input_check(x, 'title'):
+            if 'title' not in x:
                 continue
             if string_contains_year(x['title']):
                 contain_year.append(x)
 
         elif x['type'] == 'cd':
-            if not input_check(x, 'title'):
+            if 'title' not in x:
                 continue
             if string_contains_year(x['title']):
                 contain_year.append(x)
             else:
-                if not input_check(x, 'tracks'):
+                if 'tracks' not in x:
                     continue
                 for i in x['tracks']:
                     if string_contains_year(i['name']):
@@ -185,6 +175,7 @@ def main():
     print("\nItems with titles, tracks, or chapters that contain a year:")
     has_year = contains_year(data)
     print(*has_year, sep="\n")
+
 
 if __name__ == "__main__":
     main()
