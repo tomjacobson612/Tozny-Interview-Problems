@@ -170,17 +170,21 @@ def contains_year(inventory):
     return contain_year
 
 
-print("\n Top 5 most expensive items in price per category:")
-dictionary = top_5_in_category(data)
+def main():
+    print("\n Top 5 most expensive items in price per category:")
+    dictionary = top_5_in_category(data)
 
-print("\n CD's with run time longer than 60 minutes:")
-over_an_hour = running_time(data)
-print(*over_an_hour, sep="\n")
+    print("\n CD's with run time longer than 60 minutes:")
+    over_an_hour = running_time(data)
+    print(*over_an_hour, sep="\n")
 
-print("\nAuthors that have also released CDs:")
-cd_and_book = cd_and_book(data)
-print(*cd_and_book, sep="\n")
+    print("\nAuthors that have also released CDs:")
+    both = cd_and_book(data)
+    print(*both, sep="\n")
 
-print("\nItems with titles, tracks, or chapters that contain a year:")
-has_year = contains_year(data)
-print(*has_year, sep="\n")
+    print("\nItems with titles, tracks, or chapters that contain a year:")
+    has_year = contains_year(data)
+    print(*has_year, sep="\n")
+
+if __name__ == "__main__":
+    main()
